@@ -1,0 +1,44 @@
+server:
+  port: 8082
+
+#  active mean it is the active documentation working
+spring:
+  profiles:
+    active : dev
+
+---
+# --- means different documentation.
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  profiles: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/myapp
+    username: root
+    password: '!09Hanumanji!'
+  jpa:
+    hibernate:
+      ddl-auto: update
+  show-sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env"
+
+---
+spring:
+  profiles: qa
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/myapp-qa
+    username: root
+    password: '!09Hanumanji!'
+  jpa:
+    hibernate:
+      ddl-auto: update
+  show-sql: true
